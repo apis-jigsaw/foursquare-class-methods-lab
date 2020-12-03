@@ -2,9 +2,7 @@ import psycopg2
 import pytest
 from decimal import *
 
-from db_utilities import *
-from category import Category
-from orm import *
+from src import *
 
 @pytest.fixture()
 def build_category():

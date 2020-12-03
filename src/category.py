@@ -1,4 +1,6 @@
-from orm import *
+from src.orm import *
+from src.db_utilities import *
+
 class Category:
     __table__ = 'categories'
     attributes = ['id', 'name']

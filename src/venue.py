@@ -1,3 +1,6 @@
+from src.orm import *
+from src.db_utilities import *
+
 class Venue():
     __table__ = 'venues'
     attributes = ['foursquare_id', 'name', 'price',
