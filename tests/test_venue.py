@@ -17,17 +17,18 @@ def clean_tables():
     yield
     drop_all_tables(test_conn, test_cursor)
 
-def test_venue_values():
-    venue = Venue()
-    venue.__dict__ = {'name':'Taco Place', 'price': 1}
-    assert venue.values() == ['Taco Place', 1]
+@pytest.fixture()
+def build_venues():
+    drop_all_tables(test_conn, test_cursor)
+    first_venue = Venue()
+    first_venue.__dict__ = {'name': 'Los Tacos Al Pastor', 'foursquare_id': '1234'}
+    save(first_venue, test_conn, test_cursor)
+    second_venue = Venue()
+    second_venue.__dict__ = {'name': 'La Famiglia', 'foursquare_id': '5678'}
+    save(second_venue, test_conn, test_cursor)
+    yield
+    drop_all_tables(test_conn, test_cursor)
 
-def test_venue_keys():
-    venue = Venue()
-    venue.__dict__ = {'likes': 12, 'name':'Taco Place', 'price': 1}
-    assert venue.keys() == 'name, price, likes'
-
-def test_save_venue(clean_tables):
-    venue = Venue()
-    venue.__dict__ = {'likes': 12, 'name':'Taco Place', 'price': 1}
-    venue.save(test_conn, test_cursor)
+def test_find_venue_by_id(build_venues):
+    venue = Venue.find_by_foursquare_id('1234', test_cursor)
+    assert venue.name == 'Los Tacos Al Pastor'

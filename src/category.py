@@ -3,7 +3,11 @@ from src.db_utilities import *
 
 class Category:
     __table__ = 'categories'
-    attributes = ['id', 'name']
+    columns = ['id', 'name']
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
     @classmethod
     def find_by_name(self, name, cursor):
