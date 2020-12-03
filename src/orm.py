@@ -1,7 +1,7 @@
 def build_from_record(Class, record):
     if not record: return None
 
-    attr = dict(zip(Class.attributes, record))
+    attr = dict(zip(Class.columns, record))
     obj = Class()
     obj.__dict__ = attr
     return obj
@@ -14,11 +14,11 @@ def find_all(Class, cursor):
 
 def values(obj):
     venue_attrs = obj.__dict__
-    return [venue_attrs[attr] for attr in obj.attributes if attr in venue_attrs.keys()]
+    return [venue_attrs[attr] for attr in obj.columns if attr in venue_attrs.keys()]
 
 def keys(obj):
     venue_attrs = obj.__dict__
-    selected = [attr for attr in obj.attributes if attr in venue_attrs.keys()]
+    selected = [attr for attr in obj.columns if attr in venue_attrs.keys()]
     return ', '.join(selected)
 
 

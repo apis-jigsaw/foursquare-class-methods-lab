@@ -63,3 +63,6 @@ def test_find_or_create_by_finds_when_existing_category(clean_tables):
     end_cat_num = test_cursor.fetchone()
     assert end_cat_num == begin_cat_num
 
+def test_find_all(build_categories):
+    categories = find_all(Category, test_cursor)
+    assert [category.name for category in categories] == ['Taco Places', 'Asian Fusion']
