@@ -12,6 +12,6 @@ def drop_tables(table_names, cursor, conn):
         drop_records(cursor, conn, table_name)
 
 def drop_all_tables(conn, cursor):
-    table_names = ['venue_categories', 'locations', 'categories', 'venues']
+    table_names = ['categories', 'venues']
     drop_tables(table_names, cursor, conn)
 
